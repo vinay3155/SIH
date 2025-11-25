@@ -6,14 +6,97 @@ sih-2025-health-monitoring/
 │   │   │   └── main.ino
 │   │   ├── circuits/
 │   │   │   └── esp32_max30100_wiring.png
-│   │   └── README.md
+│   │   └── # SIH 2025 – Health Monitoring & Fall Detection System
+
+## 👥 spark of genius 
+TEAM_NAME
+
+## 🧑‍💻 EARLY FALL PREVENTION FOR ELDERLY PEOPLE
+Real-time health monitoring and early fall detection using IoT, AI, and an Android application to reduce medical emergencies.
+
+---
+
+## 🚀 Features
+- ESP32-based health monitoring device  
+- Heart rate & SpO2 using MAX30100  
+- GSR sensor for anxiety/stress  
+- Fall detection using IMU (MPU6050/ADXL345)  
+- AI-based fall prediction  
+- Android dashboard for live data  
+- Emergency alert system  
+- Cloud data storage with Firebase / MQTT
+
+---
+
+## 📁 Project Structure
+- *hardware/* – ESP32 code, circuits, sensor wiring  
+- *software/* – Android app + Backend/Firebase  
+- *ai-model/* – Dataset, training, exported TFLite model  
+- *documents/* – PPT, reports, BOM, SIH submissions
+
+---
+
+## 🛠 Hardware Used
+- ESP32 (38-pin)
+- MAX30100 Pulse/SpO2 Sensor  
+- GSR Sensor  
+- MPU6050 / ADXL345 IMU  
+- OLED Display  
+- Li-ion Battery + Charging Module  
+- Breadboard + Jumper wires
+
+---
+
+## 📡 Communication
+- WiFi → MQTT  
+- Firebase Realtime Database  
+- APIs for app integration (optional)
+
+---
+
+## 🔧 How to Run ESP32 Code
+1. Install Arduino IDE  
+2. Install ESP32 board support  
+3. Open file:
 │   │
 │   ├── sensors/
 │   │   ├── MAX30100/
 │   │   │   ├── test-code/
 │   │   │   └── datasheet.pdf
 │   │   ├── GSR/
-│   │   └── README.md
+│   │   └── # Sensor Information & Test Codes
+
+This folder contains details and test programs for all sensors used in the project.
+
+---
+
+## 📌 Sensors Used
+
+### 1️⃣ MAX30100 – Heart Rate & SpO2
+- I2C device  
+- Must be powered using *3.3V only*  
+- Use pull-up resistors if readings fluctuate  
+- Test code is in MAX30100/test-code/
+
+### 2️⃣ GSR Sensor – Anxiety Level
+- Analog sensor  
+- Connect to ESP32 GPIO34  
+- Higher value → higher stress
+
+### 3️⃣ MPU6050 / ADXL345 – Fall Detection
+- IMU sensor  
+- Used for acceleration + orientation  
+- Supports AI fall prediction
+
+---
+
+## 📄 Files Include
+- Datasheets  
+- Test codes  
+- Sensor parameters  
+- Calibration instructions
+
+Place all datasheets inside /sensors/SENSOR_NAME/.
 │   │
 │   └── hardware-images/
 │       └── prototype.jpg
@@ -22,14 +105,84 @@ sih-2025-health-monitoring/
 │   ├── android-app/
 │   │   ├── app/
 │   │   ├── screenshots/
-│   │   └── README.md
+│   │   └── # Android App – Health Monitoring Dashboard
+
+This folder contains the Android application source code, APK, and screenshots.
+
+---
+
+## 📌 App Features
+- Displays heart rate, SpO2, anxiety level  
+- Shows fall alerts  
+- Stores history using Firebase  
+- Emergency contact alert system  
+- Clean UI for real-time monitoring
+
+---
+
+## 📁 Folder Structure
+- app/ – Android Studio project  
+- screenshots/ – UI screen captures  
+- README.md – App usage guide
+
+---
+
+## 🚀 How to Run the App
+1. Open software/android-app/app/ in *Android Studio*  
+2. Connect your mobile device  
+3. Click *Run*  
+4. Ensure Firebase credentials are added in google-services.json
+
+---
+
+## ⚡ APK Installation
+You can also install the APK manually:
 │   │
 │   ├── backend/
 │   │   ├── api/
 │   │   ├── firebase/
-│   │   └── README.md
+│   │   └── 
 │   │
-│   └── README.md
+│   └── # Backend / Firebase / MQTT
+
+This folder contains backend integration files required for communication between ESP32 and Android app.
+
+---
+
+## 📡 Firebase Structure
+- /heartRate
+- /spo2
+- /gsr
+- /fallAlert
+- /timestamp
+
+ESP32 pushes data → Firebase  
+Android app reads data → Live dashboard
+
+---
+
+## 🔌 MQTT Option (Optional)
+For advanced users, MQTT topics:
+- health/heartRate
+- health/spo2
+- health/anxiety
+- health/fall
+
+---
+
+## 📁 Files
+- api/ – REST API routes (optional)  
+- firebase/ – Firebase configuration files  
+- README.md – Backend usage guide
+
+---
+
+## 🔧 Setup Steps
+1. Create Firebase Project  
+2. Enable Realtime Database  
+3. Download google-services.json → Add to Android app  
+4. Add Firebase Web API key for ESP32  
+5. Start receiving data
 │
 ├── ai-model/
 │   ├── training/
@@ -41,7 +194,47 @@ sih-2025-health-monitoring/
 │   ├── exported-model/
 │   │   └── model.tflite
 │   │
-│   └── README.md
+│   └── # AI Model – Fall Detection
+
+This folder contains dataset, training scripts, and the final TFLite model for fall detection.
+
+---
+
+## 🧠 Model Overview
+We use acceleration + gyroscope data from the IMU (MPU6050/ADXL345) to detect:
+- Sudden changes in acceleration  
+- Orientation shift  
+- Activity classification
+
+A neural network is trained on fall vs non-fall samples.
+
+---
+
+## 📁 Folder Details
+- training/ → Dataset + notebooks  
+- training/train_model.ipynb → Main training notebook  
+- training/preprocess.py → Data cleaning  
+- exported-model/model.tflite → Final model used in ESP32/Android  
+- evaluation/ → Graphs and metrics
+
+---
+
+## 🚀 Training Steps
+1. Collect IMU data  
+2. Preprocess using preprocess.py  
+3. Train model in Google Colab  
+4. Export to TFLite  
+5. Deploy on Android or ESP32 (TinyML)
+
+---
+
+## 📊 Model Accuracy
+(Add your accuracy after training)
+
+Example:
+- Accuracy: 92%  
+- Precision: 93%  
+- Recall: 90%
 │
 ├── documents/
 │   ├── ppt/
